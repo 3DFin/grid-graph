@@ -25,9 +25,9 @@
  *      distance as the neighbor v + (1, 1, 1, 1).
  *
  * A graph with V vertices and E edges is represented either as adjacency
- * graph (list of E edges as ordered pair of vertices), or as forward-star,
- * where edges are numeroted so that all vertices starting from a same vertex
- * are consecutive, and represented by the following parameters:
+ * graph (list of E edges given as ordered pair of vertices), or as
+ * forward-star, where edges are numeroted so that all vertices starting from a
+ * same vertex are consecutive, and represented by the following parameters:
  * first_edge - array of length V + 1, indicating for each vertex, the first
  *      edge starting from the vertex (or, if there are none, starting from
  *      the next vertex); the last value is always the total number of edges
