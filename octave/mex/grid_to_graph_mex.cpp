@@ -1,6 +1,6 @@
 /*=============================================================================
- * [first_edge, adj_vertices, connectivities] = grid_to_graph_mex(shape,
- *      connectivity = 1)
+ * [first_edge, adj_vertices, connectivities, src_vertices] = 
+ *      grid_to_graph_mex(shape, connectivity = 1)
  * 
  *  Hugo Raguet 2019
  *===========================================================================*/
@@ -63,7 +63,19 @@ static void grid_to_graph_mex(int nlhs, mxArray **plhs, int nrhs,
         for (size_t e = 0; e < E; e++){ connectivities[e] = edges[e]; }
     }
 
-    mxFree((void*) edges);
+    /* permute source vertices and set to output if requested */
+    if (nlhs > 3){ 
+        for (size_t e = 0; e < E; e++){ edges[2*reindex[e] + 1] = edges[2*e]; }
+        for (size_t e = 0; e < E; e++){ edges[e] = edges[2*e + 1]; }
+        edges = (index_t*) mxRealloc((void*) edges, sizeof(index_t)*E);
+        plhs[3] = mxCreateNumericMatrix(0, 0, mxINDEX_CLASS, mxREAL);
+        mxSetM(plhs[3], 1);
+        mxSetN(plhs[3], E);
+        mxSetData(plhs[3], (void*) edges);
+    }else{
+        mxFree((void*) edges);
+    }
+
     mxFree((void*) reindex);
 }
 
