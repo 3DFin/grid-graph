@@ -11,9 +11,8 @@ try
     if LDFLAGS(end)==10, LDFLAGS = LDFLAGS(1:end-1); end
     CXXFLAGSorig = CXXFLAGS;
     LDFLAGSorig = LDFLAGS;
-    CXXFLAGS = sprintf('%s %s', CXXFLAGS, ...
-        '-Wextra -Wpedantic -std=c++11 -fopenmp');
-    LDFLAGS = sprintf('%s %s', LDFLAGS, '-fopenmp');
+    CXXFLAGS = [CXXFLAGS ' -Wextra -Wpedantic -std=c++11 -fopenmp -g0'];
+    LDFLAGS = [LDFLAGS ',-fopenmp'];
     setenv('CXXFLAGS', CXXFLAGS);
     setenv('LDFLAGS', LDFLAGS);
 
@@ -27,7 +26,7 @@ try
         -output bin/adjacency_to_forward_star_mex
     clear adjacency_to_forward_star_mex
 
-    system('rm *.o');
+    if exist('adjacency_to_forward_star_mex.o'), system('rm *.o'); end
 catch % if an error occur, makes sure not to change the working directory
     % back to original environment
     setenv('CXXFLAGS', CXXFLAGSorig);
@@ -35,7 +34,6 @@ catch % if an error occur, makes sure not to change the working directory
     cd(origDir);
 	rethrow(lasterror);
 end
-addpath('bin/');
 % back to original environment
 setenv('CXXFLAGS', CXXFLAGSorig);
 setenv('LDFLAGS', LDFLAGSorig);

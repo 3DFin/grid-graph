@@ -30,7 +30,8 @@
  * same vertex are consecutive, and represented by the following parameters:
  * first_edge - array of length V + 1, indicating for each vertex, the first
  *      edge starting from the vertex (or, if there are none, starting from
- *      the next vertex); the last value is always the total number of edges
+ *      the next vertex); the first value is always zero and the last value is
+ *      always the total number of edges
  * adj_vertices - array of length E, indicating for each edge, its ending
  *      vertex
  *
@@ -43,7 +44,7 @@
 
 /* vertex_t is supposed to be an unsigned integer type able to hold the total
  * number of _vertices_ of the manipulated graphs;
- * index_t is supposed to be an unsigned integer type able to hold the total
+ * edge_t is supposed to be an unsigned integer type able to hold the total
  * number of _edges_ of the manipulated graphs */
 
 /* compute the number of edges in the resulting graph */
@@ -62,9 +63,9 @@ void adjacency_grid_graph(size_t D, vertex_t* shape, conn_t connectivity,
  * connectivities are computed unless corresponding argument is null */
 
 /* convert adjacency list to forward-star representation */
-template <typename vertex_t = unsigned int, typename index_t = vertex_t>
+template <typename vertex_t = unsigned int, typename edge_t = vertex_t>
 void adjacency_to_forward_star(vertex_t V, size_t E, const vertex_t* edges,
-    index_t* first_edge, index_t* reindex);
+    edge_t* first_edge, edge_t* reindex);
 /* first_edge is an array of length V + 1, already allocated;
  * reindex is the permutation indices so that all vertices starting from a
  * same vertex are consecutive, array of length E, already allocated;

@@ -5,18 +5,18 @@
 #include "../include/grid_graph.hpp"
 #include "../include/omp_num_threads.hpp"
 
-template <typename vertex_t, typename index_t>
+template <typename vertex_t, typename edge_t>
 void adjacency_to_forward_star(vertex_t V, size_t E, const vertex_t* edges,
-    index_t* first_edge, index_t* reindex)
+    edge_t* first_edge, edge_t* reindex)
 {
     /* compute number of edges for each vertex */
     for (vertex_t v = 0; v < V; v++){ first_edge[v] = 0; }
     for (size_t e = 0; e < E; e++){ reindex[e] = first_edge[edges[2*e]]++; }
 
     /* compute cumulative sum and shift to the right */
-    index_t sum = 0; // first_edge[0] is always 0
+    edge_t sum = 0; // first_edge[0] is always 0
     for (vertex_t v = 0; v <= V; v++){
-        index_t tmp = first_edge[v];
+        edge_t tmp = first_edge[v];
         first_edge[v] = sum;
         sum += tmp;
     } // first_edge[V] should be total number of edges

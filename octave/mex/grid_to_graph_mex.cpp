@@ -45,8 +45,8 @@ static void grid_to_graph_mex(int nlhs, mxArray **plhs, int nrhs,
 
     index_t* reindex = (index_t*) mxMalloc(sizeof(index_t)*E);
 
-    adjacency_to_forward_star<index_t, index_t>(V, E, (const index_t*) edges,
-        first_edge, reindex);
+    adjacency_to_forward_star<index_t, index_t>(V, E, edges, first_edge,
+        reindex);
 
     /* permute ending vertices to get adjacent vertices */
     plhs[1] = mxCreateNumericMatrix(1, E, mxINDEX_CLASS, mxREAL);
@@ -55,18 +55,22 @@ static void grid_to_graph_mex(int nlhs, mxArray **plhs, int nrhs,
         adj_vertices[reindex[e]] = edges[2*e + 1];
     }
     
-    /* permute connectivity correspondingly (reuse edges storage) */
+    /* permute connectivity correspondingly and set to output if requested */
     if (nlhs > 2){ 
-        for (size_t e = 0; e < E; e++){
-            edges[reindex[e]] = connectivities[e];
+        /* reuse edges storage */
+        if (nlhs > 3){ /* permute and keep source vertices first */
+            for (size_t e = 0; e < E; e++){
+                edges[2*reindex[e] + 1] = edges[2*e];
+            }
+            for (size_t e = 0; e < E; e++){ edges[e] = edges[2*e + 1]; }
         }
-        for (size_t e = 0; e < E; e++){ connectivities[e] = edges[e]; }
+        index_t* buf = edges + E;
+        for (size_t e = 0; e < E; e++){ buf[reindex[e]] = connectivities[e]; }
+        for (size_t e = 0; e < E; e++){ connectivities[e] = buf[e]; }
     }
 
-    /* permute source vertices and set to output if requested */
+    /* set source vertices to output if requested */
     if (nlhs > 3){ 
-        for (size_t e = 0; e < E; e++){ edges[2*reindex[e] + 1] = edges[2*e]; }
-        for (size_t e = 0; e < E; e++){ edges[e] = edges[2*e + 1]; }
         edges = (index_t*) mxRealloc((void*) edges, sizeof(index_t)*E);
         plhs[3] = mxCreateNumericMatrix(0, 0, mxINDEX_CLASS, mxREAL);
         mxSetM(plhs[3], 1);
