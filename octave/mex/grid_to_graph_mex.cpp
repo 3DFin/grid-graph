@@ -2,6 +2,9 @@
  * [first_edge, adj_vertices, connectivities, src_vertices] = 
  *      grid_to_graph_mex(shape, connectivity = 1)
  * 
+ * (first_edge, adj_vertices) constitutes forward-star representation
+ * (src_vertices, adj_vertices) constitutes adjacency list representation
+ * 
  *  Hugo Raguet 2019
  *===========================================================================*/
 #include <cstdint>

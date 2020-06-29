@@ -25,8 +25,8 @@
  *      distance as the neighbor v + (1, 1, 1, 1).
  *
  * A graph with V vertices and E edges is represented either as adjacency
- * graph (list of E edges given as ordered pair of vertices), or as
- * forward-star, where edges are numeroted so that all vertices starting from a
+ * list (array of E edges given as ordered pair of vertices), or as
+ * forward-star, where edges are numeroted so that all edges originating from a
  * same vertex are consecutive, and represented by the following parameters:
  * first_edge - array of length V + 1, indicating for each vertex, the first
  *      edge starting from the vertex (or, if there are none, starting from
@@ -34,6 +34,10 @@
  *      always the total number of edges
  * adj_vertices - array of length E, indicating for each edge, its ending
  *      vertex
+ *
+ * Vertices of the grid are indexed in column-major order, that is consecutive
+ * vertices along the first dimension gets consecutive indices, then
+ * consecutive columns, and so on along further dimensions.
  *
  * Parallel implementation with OpenMP API
  *

@@ -11,7 +11,8 @@ try
     if LDFLAGS(end)==10, LDFLAGS = LDFLAGS(1:end-1); end
     CXXFLAGSorig = CXXFLAGS;
     LDFLAGSorig = LDFLAGS;
-    CXXFLAGS = [CXXFLAGS ' -Wextra -Wpedantic -std=c++11 -fopenmp -g0'];
+    CXXFLAGS = [CXXFLAGS ' -Wextra -Wpedantic -std=c++11 -fopenmp -g0 ' ...
+        '-DMIN_OPS_PER_THREAD=10000'];
     LDFLAGS = [LDFLAGS ',-fopenmp'];
     setenv('CXXFLAGS', CXXFLAGS);
     setenv('LDFLAGS', LDFLAGS);

@@ -33,9 +33,9 @@ A grid graph in dimension _D_ is defined by the following parameters:
      distance as the neighbor _v_ + (1, 1, 1, 1).
 
 A graph with _V_ vertices and _E_ edges is represented either as adjacency
-graph (list of _E_ edges given as ordered pair of vertices), or as
-forward-star, where edges are numeroted (from 0 to _E_ − 1) so that all
-vertices starting from a same vertex are consecutive, and represented by the
+list (array of _E_ edges given as ordered pair of vertices), or as
+forward-star, where edges are numeroted (from 0 to _E_ − 1) so that all edges
+originating from a same vertex are consecutive, and represented by the
 following parameters:    
 
  - `first_edge` - array of length _V_ + 1, indicating for each vertex, the
@@ -43,6 +43,10 @@ following parameters:
     the next vertex); the last value is always the total number of edges  
  - `adj_vertices` - array of length _E_, indicating for each edge, its ending
     vertex  
+
+Vertices of the grid are indexed in column-major order, that is consecutive 
+vertices along the first dimension gets consecutive indices, then consecutive
+columns, and so on along further dimensions.
 
 Work possibly in parallel with OpenMP API  
 
