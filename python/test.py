@@ -15,7 +15,7 @@ from grid_graph import edge_list_to_forward_star, grid_to_graph
 grid_shape = np.array([3, 2, 2], dtype = "int16");
 
 fe, av, co = grid_to_graph(grid_shape, compute_connectivities = True,
-    connectivity = 2, row_major_order = False);
+    connectivity = 2, row_major_index = False);
 
 print('fe')
 print(fe)
@@ -34,7 +34,7 @@ print(np.array(range(grid_shape.prod())).reshape(grid_shape, order = 'F'))
 print('')
 
 ed = grid_to_graph(grid_shape, compute_connectivities = False,
-    connectivity = 2, row_major_order = False, graph_as_forward_star = False);
+    connectivity = 2, row_major_index = False, graph_as_forward_star = False);
 
 print('ed')
 print(ed)

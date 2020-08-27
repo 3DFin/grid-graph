@@ -175,7 +175,7 @@ static const char* edge_list_to_forward_star_doc =
 " reindex - for all edges originating from a same vertex being consecutive,\n"
 "           they must be reordered; reindex keep track of this permutation\n"
 "           so that edge number 'e' in the original list becomes edge number\n"
-"           reindex[e] in the forward-star structure.\n"
+"          reindex[e] in the forward-star structure.\n"
 "\n"
 "Hugo Raguet 2020\n";
 
@@ -348,10 +348,12 @@ static const char* grid_to_graph_doc =
 " first_edge, adj_vertices[, connectivities] = grid_to_graph(shape,\n"
 "       connectivity = 1, compute_connectivities = False,\n"
 "       graph_as_forward_star = True, row_major_index = True)\n"
-"\n or\n"
+"\n"
+"or\n"
+"\n"
 " edges[, connectivities] = grid_to_graph(shape, connectivity = 1,\n"
 "       compute_connectivities = False, graph_as_forward_star = False,\n"
-"       row_major_index = True)\n";
+"       row_major_index = True)\n"
 "\n"
 "Compute the graph structure defined by local connectivity on a\n"
 "multidimensional grid.\n"
@@ -407,8 +409,8 @@ static const char* grid_to_graph_doc =
 "       because numpy uses row-major (C-contiguous) arrays by default.\n"
 "       If set to False, indexing uses column-major order (indices increase\n"
 "       first along the first dimension and so on up to the last); note that\n"
-"       this is equivalent to reverting the order of the grid dimensions in 
-"       'shape' (in 2D, this amounts to transposition).
+"       this is equivalent to reverting the order of the grid dimensions in\n"
+"       'shape' (in 2D, this amounts to transposition).\n"
 "\n"
 "OUTPUTS:\n"
 " first_edge, adj_vertices - if graph_as_forward_star is True, forward-star\n"
