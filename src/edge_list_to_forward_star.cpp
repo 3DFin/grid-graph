@@ -2,11 +2,11 @@
  * Hugo Raguet 2019
  *===========================================================================*/
 #include <cstdint>
-#include "../include/grid_graph.hpp"
-#include "../include/omp_num_threads.hpp"
+#include "grid_graph.hpp"
+#include "omp_num_threads.hpp"
 
 template <typename vertex_t, typename edge_t>
-void adjacency_to_forward_star(vertex_t V, size_t E, const vertex_t* edges,
+void edge_list_to_forward_star(vertex_t V, size_t E, const vertex_t* edges,
     edge_t* first_edge, edge_t* reindex)
 {
     /* compute number of edges for each vertex */
@@ -23,13 +23,19 @@ void adjacency_to_forward_star(vertex_t V, size_t E, const vertex_t* edges,
 
     /* finalize reindex */
     #pragma omp parallel for NUM_THREADS(E)
-    for (size_t e = 0; e < E; e++){ reindex[e] += first_edge[edges[2*e]]; }
+    /* unsigned loop counter is allowed since OpenMP 3.0 (2008)
+     * but MSVC compiler still does not support it as of 2020 */
+    for (long long e = 0; e < (long long) E; e++){
+        reindex[e] += first_edge[edges[2*e]];
+    }
 }
 
-/* instantiate for compilation */
-template void adjacency_to_forward_star<uint16_t, uint16_t>(uint16_t V,
-    size_t E, const uint16_t* edges, uint16_t* first_edge, uint16_t* reindex);
-template void adjacency_to_forward_star<uint32_t, uint32_t>(uint32_t V,
-    size_t E, const uint32_t* edges, uint32_t* first_edge, uint32_t* reindex);
-template void adjacency_to_forward_star<uint64_t, uint64_t>(uint64_t V,
-    size_t E, const uint64_t* edges, uint64_t* first_edge, uint64_t* reindex);
+/**  instantiate for compilation  **/
+
+#define INSTANCE(vertex_t, edge_t) \
+    template void edge_list_to_forward_star<vertex_t, edge_t> \
+        (vertex_t, size_t, const vertex_t*, edge_t*, edge_t*);
+
+INSTANCE(uint16_t, uint16_t)
+INSTANCE(uint32_t, uint32_t)
+INSTANCE(uint64_t, uint64_t)

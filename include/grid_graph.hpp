@@ -5,8 +5,8 @@
  * D - the number of dimensions
  * shape - array of length D, giving the grid size in each dimension
  * connectivity - defines the neighboring relationship;
- *      corresponds to the square of the maximum Euclidean distance between two
- *      neighbors;
+ *      corresponds to the _square_ of the maximum Euclidean distance between
+ *      two neighbors;
  *      if less than 4, it defines the number of coordinates allowed
  *      to simultaneously vary (+1 or -1) to define a neighbor; in that case,
  *      each level l of connectivity in dimension D adds binom(D, l)*2^l
@@ -24,10 +24,10 @@
  *      distant" surround: the neighbor v + (2, 0, 0, 0) is at the same
  *      distance as the neighbor v + (1, 1, 1, 1).
  *
- * A graph with V vertices and E edges is represented either as adjacency
- * list (array of E edges given as ordered pair of vertices), or as
- * forward-star, where edges are numeroted so that all edges originating from a
- * same vertex are consecutive, and represented by the following parameters:
+ * A graph with V vertices and E edges is represented either as edge list
+ * (array of E edges given as ordered pair of vertices), or as  forward-star,
+ * where edges are numeroted so that all edges originating from a same vertex
+ * are consecutive, and represented by the following parameters:
  * first_edge - array of length V + 1, indicating for each vertex, the first
  *      edge starting from the vertex (or, if there are none, starting from
  *      the next vertex); the first value is always zero and the last value is
@@ -35,9 +35,14 @@
  * adj_vertices - array of length E, indicating for each edge, its ending
  *      vertex
  *
- * Vertices of the grid are indexed in column-major order, that is consecutive
- * vertices along the first dimension gets consecutive indices, then
- * consecutive columns, and so on along further dimensions.
+ * Vertices of the grid are indexed in _column-major_ order, that is indices
+ * increase first along the first dimension specified in the 'shape' array
+ * (in the usual convention in 2D, this corresponds to columns), and then along
+ * the second dimension, and so on up to the last dimension.
+ * Indexing in _row-major_ order (indices increase first along the last
+ * dimension and so on up to the first) can be obtained by simply reverting
+ * the order of the grid dimensions in the shape array (in 2D, this amounts to
+ * transposition).
  *
  * Parallel implementation with OpenMP API
  *
@@ -57,21 +62,21 @@ size_t num_edges_grid_graph(size_t D, vertex_t* shape, conn_t connectivity);
 
 /* compute the graph structure */
 template <typename vertex_t = unsigned int, typename conn_t = unsigned char>
-void adjacency_grid_graph(size_t D, vertex_t* shape, conn_t connectivity,
+void edge_list_grid_graph(size_t D, vertex_t* shape, conn_t connectivity,
     vertex_t* edges, conn_t* connectivities = nullptr,
     vertex_t offset_u = 0, vertex_t offset_v = 0,
-    conn_t recursive_connectivity = 0);
+    conn_t recursive_connectivity = 0, bool recursive_call = false);
 /* edges is an array of length twice the number of edges, already allocated;
  * connectivities is an array of length the number of edges, already allocated;
  * the number of edges can be found using the num_edges_grid_graph function;
  * connectivities are computed unless corresponding argument is null */
 
-/* convert adjacency list to forward-star representation */
+/* convert edge list to forward-star representation */
 template <typename vertex_t = unsigned int, typename edge_t = vertex_t>
-void adjacency_to_forward_star(vertex_t V, size_t E, const vertex_t* edges,
+void edge_list_to_forward_star(vertex_t V, size_t E, const vertex_t* edges,
     edge_t* first_edge, edge_t* reindex);
 /* first_edge is an array of length V + 1, already allocated;
- * reindex is the permutation indices so that all vertices starting from a
+ * reindex is the permutation indices so that all edges starting from a
  * same vertex are consecutive, array of length E, already allocated;
  * adj_vertices can be thus deduced from the edges by permuting the ending
  * vertices according to reindex */
