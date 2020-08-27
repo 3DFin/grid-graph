@@ -74,7 +74,7 @@ Requires `C++11`.
 Be sure to have OpenMP enabled with your compiler to enjoy parallelization. Note that, as of 2020, MSVC still does not support OpenMP 3.0 (published in 2008); consider switching to a decent compiler.  
 
 The C++ classes are documented within the corresponding headers in `include/`.  
-### Python extension module for extracting shapefile format polygons
+### Python extension module
 Requires `numpy` package.  
 See the script `setup.py` for compiling the module with `distutils`; on UNIX systems, it can be directly interpreted as `python setup.py build_ext`.  
 Compatible with Python 2 and Python 3.  
