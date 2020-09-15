@@ -94,20 +94,20 @@ static PyObject* edge_list_to_forward_star_cpy(PyObject* self, PyObject* args)
     size_t E;
 
     if (PyArray_NDIM(py_edges) == 2){
-        if (dims[0] == 2){ /* 2-by-V array, must be column-major */
+        if (dims[0] == 2){ /* 2-by-E array, must be column-major */
             if (!PyArray_IS_F_CONTIGUOUS(py_edges)){
                 PyErr_SetString(PyExc_TypeError, "Edge list to forward star: "
                     "internal memory of 'edges' must store each edge "
-                    "contiguously; a 2-by-V array must be column-major "
+                    "contiguously; a 2-by-E array must be column-major "
                     "(F-contiguous).");
                 return NULL;
             }
             E = dims[1];
-        }else if (dims[1] == 2){ /* 2-by-V array, must be column-major */
+        }else if (dims[1] == 2){ /* E-by-2 array, must be row-major */
             if (!PyArray_IS_C_CONTIGUOUS(py_edges)){
                 PyErr_SetString(PyExc_TypeError, "Edge list to forward star: "
                     "internal memory of 'edges' must store each edge "
-                    "contiguously; a V-by-2 array must be row-major "
+                    "contiguously; a E-by-2 array must be row-major "
                     "(C-contiguous).");
                 return NULL;
             }
