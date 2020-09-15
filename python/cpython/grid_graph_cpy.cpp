@@ -331,11 +331,11 @@ static PyObject* grid_to_graph_cpy(PyObject* self, PyObject* args,
             compute_connectivities, graph_as_forward_star, row_major_index);
     }else if (PyArray_TYPE(py_grid_shape) == NPY_INT32 ||
               PyArray_TYPE(py_grid_shape) == NPY_UINT32){
-        return grid_to_graph<uint16_t, NPY_UINT32>(py_grid_shape, connectivity,
+        return grid_to_graph<uint32_t, NPY_UINT32>(py_grid_shape, connectivity,
             compute_connectivities, graph_as_forward_star, row_major_index);
     }else if (PyArray_TYPE(py_grid_shape) == NPY_INT64 ||
               PyArray_TYPE(py_grid_shape) == NPY_UINT64){
-        return grid_to_graph<uint16_t, NPY_UINT64>(py_grid_shape, connectivity,
+        return grid_to_graph<uint64_t, NPY_UINT64>(py_grid_shape, connectivity,
             compute_connectivities, graph_as_forward_star, row_major_index);
     }else{
         PyErr_SetString(PyExc_TypeError, "Grid to graph: not "
