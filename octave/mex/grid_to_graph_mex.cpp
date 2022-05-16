@@ -71,9 +71,9 @@ static void grid_to_graph_mex(int nlhs, mxArray **plhs, int nrhs,
 
     if (!graph_as_forward_star){
         plhs[0] = mxCreateNumericMatrix(0, 0, mxINDEX_CLASS, mxREAL);
-        mxSetM(plhs[0], 1);
+        mxSetM(plhs[0], 2);
         mxSetN(plhs[0], E);
-        mxSetData(plhs[3], (void*) edges);
+        mxSetData(plhs[0], (void*) edges);
         return;
     }
 
@@ -101,10 +101,11 @@ static void grid_to_graph_mex(int nlhs, mxArray **plhs, int nrhs,
         for (size_t e = 0; e < E; e++){ connectivities[e] = buf[e]; }
     }
 
+    /* free unused second half of edges and permutation indices */
     mxFree((void*) reindex);
-
     adj_vertices = (index_t*)
         mxRealloc((void*) adj_vertices, sizeof(index_t)*E);
+
     plhs[1] = mxCreateNumericMatrix(0, 0, mxINDEX_CLASS, mxREAL);
     mxSetM(plhs[1], 1);
     mxSetN(plhs[1], E);

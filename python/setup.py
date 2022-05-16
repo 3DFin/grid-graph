@@ -7,9 +7,8 @@ Compilation command: python setup.py build_ext
 Hugo Raguet 2020
 """
 
-from distutils.core import setup, Extension
+from setuptools import setup, Extension
 from distutils.command.build import build
-from distutils.ccompiler import new_compiler
 import numpy
 import shutil # for rmtree, os.rmdir can only remove _empty_ directory
 import os 

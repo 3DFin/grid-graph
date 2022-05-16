@@ -13,7 +13,7 @@ try
     LDFLAGSorig = LDFLAGS;
     CXXFLAGS = [CXXFLAGS ' -Wextra -Wpedantic -std=c++11 -fopenmp -g0 ' ...
         '-DMIN_OPS_PER_THREAD=10000'];
-    LDFLAGS = [LDFLAGS ',-fopenmp'];
+    LDFLAGS = [LDFLAGS ' -fopenmp'];
     setenv('CXXFLAGS', CXXFLAGS);
     setenv('LDFLAGS', LDFLAGS);
 

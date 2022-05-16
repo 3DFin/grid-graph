@@ -125,7 +125,7 @@ static PyObject* edge_list_to_forward_star_cpy(PyObject* self, PyObject* args)
 
     if (!PyArray_ISINTEGER(py_edges)){
         PyErr_SetString(PyExc_TypeError, "Edge list to forward star: elements "
-            "in 'edges' must be a of integer type.");
+            "in 'edges' must be of integer type.");
         return NULL;
     }else if (PyArray_TYPE(py_edges) == NPY_INT16 ||
               PyArray_TYPE(py_edges) == NPY_UINT16){
@@ -164,7 +164,7 @@ static const char* edge_list_to_forward_star_doc =
 "is either uint16, uint32 or uint64, depending on the type of 'edges' input.\n"
 "\n"
 "INPUTS:\n"
-" V - the number of vertices in the graph\n"
+" V - the number of vertices in the graph; usually max(edges) + 1\n"
 " edges - list of edges, numpy array of integers, each edges being given by\n"
 "         two consecutive vertex identifiers; can thus be a E-by-2 row-major\n"
 "         (C-contiguous) array or 2-by-E column-major (F-contiguous) array,\n"
@@ -175,7 +175,10 @@ static const char* edge_list_to_forward_star_doc =
 " reindex - for all edges originating from a same vertex being consecutive,\n"
 "           they must be reordered; reindex keep track of this permutation\n"
 "           so that edge number 'e' in the original list becomes edge number\n"
-"          reindex[e] in the forward-star structure.\n"
+"           reindex[e] in the forward-star structure; in practice, in order\n"
+"           to have the same order in both structures, permute the original\n"
+"           list with `edges[reindex,:] = numpy.copy(edges)`\n"
+"           (note that row-major layout is assumed here).\n"
 "\n"
 "Hugo Raguet 2020\n";
 
@@ -403,7 +406,7 @@ static const char* grid_to_graph_doc =
 "       otherwise, edge list in 1 output array\n"
 " row_major_index - order in which vertices of the grid are indexed; if set\n"
 "       to True, row-major order is used: indices increase first along the\n"
-"       last dimension specified 'shape' (in the usual convention in 2D,\n"
+"       last dimension specified by 'shape' (in the usual convention in 2D,\n"
 "       this corresponds to rows), and then along the second to last\n"
 "       dimension, and so on up to the first dimension; this is the default\n"
 "       because numpy uses row-major (C-contiguous) arrays by default.\n"

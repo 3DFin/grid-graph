@@ -22,7 +22,7 @@ function [first_edge, adj_vertices, reindex] = ...
 % is either uint16, uint32 or uint64, depending on the type of 'edges' input.
 % 
 % INPUTS:
-%  V - the number of vertices in the graph
+%  V - the number of vertices in the graph (usually max(edge(:)) + 1)
 %  edges - list of edges, E-by-2 array of integers, each edges being given by
 %          two consecutive vertex identifiers
 % 
@@ -31,6 +31,8 @@ function [first_edge, adj_vertices, reindex] = ...
 %  reindex - for all edges originating from a same vertex being consecutive,
 %            they must be reordered; reindex keep track of this permutation
 %            so that edge number 'e' in the original list becomes edge number
-%            reindex[e] in the forward-star structure.
+%            reindex[e] in the forward-star structure; in practice, in order to
+%            have the same order in both structures, permute the original list
+%            with `edges(:, reindex + 1) = edges`.
 % 
 % Hugo Raguet 2020

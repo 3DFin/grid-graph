@@ -1,12 +1,12 @@
 function [first_edge, adj_vertices, connectivities] = grid_to_graph_mex( ...
             shape, connectivity, graph_as_forward_star)
 %
-%        [first_edge, adj_vertices, connectivities] = grid_to_graph_mex
+%        [first_edge, adj_vertices, [connectivities]] = grid_to_graph_mex
 %           (shape, [connectivity = 1], [graph_as_forward_star = true])
 % or
 %
-%        [edges, connectivities] = grid_to_graph_mex(shape, ...
-%           [connectivity = 1], graph_as_forward_star = false)
+%        [edges, [connectivities]] = grid_to_graph_mex(shape, ...
+%           connectivity, graph_as_forward_star = false)
 % 
 % Compute the graph structure defined by local connectivity on a
 % multidimensional grid.
@@ -63,7 +63,7 @@ function [first_edge, adj_vertices, connectivities] = grid_to_graph_mex( ...
 %  first_edge, adj_vertices - if graph_as_forward_star is true, forward-star
 %        representation of the resulting graph, as described above
 %  edges - if graph_as_forward_star is false, edge list representation of the
-%        resulting graph, integers array of size E-by-2
+%        resulting graph, integers array of size 2-by-E
 %  connectivities - if requested, the connectivities (square Euclidean
 %        lengths) of the edges, array of uint8 of length E
 % 
