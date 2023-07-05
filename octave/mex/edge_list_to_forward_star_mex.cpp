@@ -1,6 +1,5 @@
 /*=============================================================================
- * [first_edge, adj_vertices, reindex] = edge_list_to_forward_star_mex(V,
- *      edges)
+ * [first_edge, adj_vertices, reindex] = edge_list_to_forward_star(V, edges)
  * 
  *  Hugo Raguet 2019
  *===========================================================================*/

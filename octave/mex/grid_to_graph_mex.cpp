@@ -1,11 +1,11 @@
 /*=============================================================================
- * [first_edge, adj_vertices, connectivities] = grid_to_graph_mex
- *      (shape, [connectivity = 1], [graph_as_forward_star = true])
+ * [first_edge, adj_vertices, connectivities] = grid_to_graph(shape,
+ *      [connectivity = 1], [graph_as_forward_star = true])
  *
  * or
  *
- * [edges, connectivities] = grid_to_graph_mex
- *      (shape, [connectivity = 1], graph_as_forward_star = false)
+ * [edges, connectivities] = grid_to_graph(shape, [connectivity = 1],
+ *      graph_as_forward_star = false)
  * 
  * If graph_as_forward_star is true (the default), then the two first outputs 
  * first_edge, adj_vertices constitutes the forward star representation of the

@@ -1,6 +1,6 @@
 origDir = pwd; % remember working directory
 cd(fileparts(which('compile_mex.m'))); 
-mkdir('bin/');
+if ~exist('bin/'), mkdir('bin/'); end
 try
     % compilation flags 
     [~, CXXFLAGS] = system('mkoctfile -p CXXFLAGS');
@@ -19,13 +19,13 @@ try
 
     mex -I../include mex/grid_to_graph_mex.cpp ../src/grid_to_graph.cpp ...
         ../src/edge_list_to_forward_star.cpp ...
-        -output bin/grid_to_graph_mex
-    clear grid_to_graph_mex
+        -output bin/grid_to_graph
+    clear grid_to_graph
 
     mex -I../include mex/edge_list_to_forward_star_mex.cpp ...
         ../src/edge_list_to_forward_star.cpp ...
-        -output bin/edge_list_to_forward_star_mex
-    clear edge_list_to_forward_star_mex
+        -output bin/edge_list_to_forward_star
+    clear edge_list_to_forward_star
 
     if exist('edge_list_to_forward_star_mex.o'), system('rm *.o'); end
 catch % if an error occur, makes sure not to change the working directory
