@@ -76,8 +76,9 @@ Be sure to have OpenMP enabled with your compiler to enjoy parallelization. Note
 The C++ classes are documented within the corresponding headers in `include/`.  
 ### Python extension module
 Requires `numpy` package.  
-See the script `setup.py` for compiling the module with `distutils`; on UNIX systems, it can be directly interpreted as `python setup.py build_ext`.  
-Compatible with Python 2 and Python 3.  
+Requires `numpy` package.  
+See the script `setup.py` for compiling modules with `setuptools`; it can be run simply by using `pip`
+e.g. `python -m pip install .`. pre compiled binaries for Windows and Linux will soon be available on `PyPI
 
 Once compiled, see the documentation with the `help()` python utility.
 

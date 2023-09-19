@@ -1,0 +1,24 @@
+[build-system]
+requires = ["wheel", "setuptools", "oldest-supported-numpy"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pygrid-graph"
+version = "0.0.1"
+readme = "README.md"
+description = "Some tools for manipulating nearest-neighbors graphs defined on regular grids"
+requires-python = ">=3.8"
+license = {file = "LICENSE"}
+authors = [
+  {name = "Hugo Raget", email = "hugo.raguet@insa-cvl.fr"}
+]
+keywords = ["graph", "grid", "nearest-neighbors", "cut pursuit", "graph signal processing"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python",
+  "Topic :: Scientific/Engineering"
+]
+
+[project.urls]
+homepage = "https://gitlab.com/1a7r0ch3/grid-graph"
+repository = "https://gitlab.com/1a7r0ch3/grid-graph.git"
