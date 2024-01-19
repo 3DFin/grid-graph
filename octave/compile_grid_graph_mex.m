@@ -1,5 +1,5 @@
 origDir = pwd; % remember working directory
-cd(fileparts(which('compile_mex.m'))); 
+cd(fileparts(which('compile_grid_graph_mex.m'))); 
 if ~exist('bin/'), mkdir('bin/'); end
 try
     % compilation flags 

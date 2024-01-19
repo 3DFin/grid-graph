@@ -23,7 +23,7 @@ function [first_edge, adj_vertices, reindex] = ...
 % 
 % INPUTS:
 %  V - the number of vertices in the graph (usually max(edge(:)) + 1)
-%  edges - list of edges, E-by-2 array of integers, each edges being given by
+%  edges - list of edges, 2-by-E array of integers, each edges being given by
 %          two consecutive vertex identifiers
 % 
 % OUTPUTS:
