@@ -1,6 +1,6 @@
 origDir = pwd; % remember working directory
 cd(fileparts(which('compile_grid_graph_mex.m'))); 
-if ~exist('bin/'), mkdir('bin/'); end
+if ~exist('./bin/'), mkdir('bin/'); end
 try
     % compilation flags 
     [~, CXXFLAGS] = system('mkoctfile -p CXXFLAGS');
