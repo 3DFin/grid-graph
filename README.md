@@ -83,7 +83,7 @@ Once compiled, see the documentation with the `help()` python utility.
 
 
 ### GNU Octave or Matlab
-See the script `compile_mex.m` for typical compilation commands; it can be run directly from the GNU Octave interpreter, but Matlab users must set compilation flags directly on the command line `CXXFLAGS = ...` and `LDFLAGS = ...`.  
+See the script `compile_grid_graph_mex.m` for typical compilation commands; it can be run directly from the GNU Octave interpreter, but Matlab users must set compilation flags directly on the command line `CXXFLAGS = ...` and `LDFLAGS = ...`.  
 
 Extensive documention of the MEX interfaces can be found within dedicated `.m` files in `octave/doc/`.  
 
