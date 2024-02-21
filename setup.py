@@ -9,7 +9,7 @@ Hugo Raguet 2020
 
 from setuptools import setup, Extension
 import numpy
-import os 
+import platform
 
 ###  targets and compile options  ###
 name = "grid_graph"
@@ -18,15 +18,21 @@ include_dirs = [numpy.get_include(), # find the Numpy headers
                 "include"]
 # compilation and linkage options
 # MIN_OPS_PER_THREAD roughly controls parallelization, see doc in README.md
-if os.name == 'nt': # windows
+if platform.system() == "Windows":
     extra_compile_args = ["-DMIN_OPS_PER_THREAD=10000"]
     extra_link_args = ["/lgomp"]
-elif os.name == 'posix': # linux
+elif platform.system() == "Linux":
     extra_compile_args = ["-std=c++11", "-fopenmp",
                           "-DMIN_OPS_PER_THREAD=10000"]
     extra_link_args = ["-lgomp"]
+elif platform.system() == "Darwin":
+    extra_compile_args = ["-std=c++11", "-fopenmp",
+                          "-DMIN_OPS_PER_THREAD=10000"]
+    extra_link_args = ["-lomp"] 
+# It is more a matter of GCC vs. Clang more than a macOS vs Linux issue
+# use something like meson/cmake to handle this in a proper way
 else:
-    raise NotImplementedError('OS not yet supported.')
+    raise NotImplementedError("OS not yet supported.")
 
 ###  compilation  ###
 mod = Extension(
