@@ -14,11 +14,8 @@ import shutil # for rmtree, os.rmdir can only remove _empty_ directory
 import os 
 import re
 
-###  targets and compile options  ###
-name = "grid_graph"
+###  options  ###
 
-include_dirs = [numpy.get_include(), # find the Numpy headers
-                "../include"]
 # compilation and linkage options
 # MIN_OPS_PER_THREAD roughly controls parallelization, see doc in README.md
 if os.name == 'nt': # windows
@@ -57,13 +54,14 @@ if not os.path.exists("bin"):
 purge("bin/", "grid_graph")
 
 ###  compilation  ###
+name = "grid_graph"
 mod = Extension(
         name,
         # list source files
         ["cpython/grid_graph_cpy.cpp",
          "../src/edge_list_to_forward_star.cpp",
          "../src/grid_to_graph.cpp"],
-        include_dirs=include_dirs,
+        include_dirs=[numpy.get_include(), "../include"],
         extra_compile_args=extra_compile_args,
         extra_link_args=extra_link_args)
 

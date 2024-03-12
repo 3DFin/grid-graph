@@ -45,27 +45,27 @@ static PyObject* edge_list_to_forward_star(size_t V, size_t E,
     const index_t* edges = (index_t*) PyArray_DATA(py_edges);
 
     npy_intp size_py_first_edge[] = {(npy_intp) V + 1};
-    PyArrayObject* py_first_edge = (PyArrayObject*) PyArray_Zeros(1,
-        size_py_first_edge, PyArray_DescrFromType(NPY_INDEX), 0);
+    PyArrayObject* py_first_edge = (PyArrayObject*) PyArray_ZEROS(1,
+        size_py_first_edge, NPY_INDEX, 0);
     index_t* first_edge = (index_t*) PyArray_DATA(py_first_edge);
 
     npy_intp size_py_reindex[] = {(npy_intp) E};
-    PyArrayObject* py_reindex = (PyArrayObject*) PyArray_Zeros(1,
-        size_py_reindex, PyArray_DescrFromType(NPY_INDEX), 0);
+    PyArrayObject* py_reindex = (PyArrayObject*) PyArray_ZEROS(1,
+        size_py_reindex, NPY_INDEX, 0);
     index_t* reindex = (index_t*) PyArray_DATA(py_reindex);
 
     edge_list_to_forward_star<index_t, index_t>(V, E, edges, first_edge,
         reindex);
 
     npy_intp size_py_adj_vertices[] = {(npy_intp) E};
-    PyArrayObject* py_adj_vertices = (PyArrayObject*) PyArray_Zeros(1,
-        size_py_adj_vertices, PyArray_DescrFromType(NPY_INDEX), 0);
+    PyArrayObject* py_adj_vertices = (PyArrayObject*) PyArray_ZEROS(1,
+        size_py_adj_vertices, NPY_INDEX, 0);
     index_t* adj_vertices = (index_t*) PyArray_DATA(py_adj_vertices);
     for (size_t e = 0; e < E; e++){
         adj_vertices[reindex[e]] = edges[2*e + 1];
     }
 
-    return Py_BuildValue("OOO", py_first_edge, py_adj_vertices, py_reindex);
+    return Py_BuildValue("NNN", py_first_edge, py_adj_vertices, py_reindex);
 }
 
 /* actual interface for edge_list_to_forward_star */
@@ -224,16 +224,16 @@ static PyObject* grid_to_graph(PyArrayObject* py_grid_shape,
 
     /* compute edges and connectivities */
     npy_intp size_py_edges[] = {(npy_intp) E, 2};
-    PyArrayObject* py_edges = (PyArrayObject*) PyArray_Zeros(2,
-        size_py_edges, PyArray_DescrFromType(NPY_INDEX), 0);
+    PyArrayObject* py_edges = (PyArrayObject*) PyArray_ZEROS(2,
+        size_py_edges, NPY_INDEX, 0);
     index_t* edges = (index_t*) PyArray_DATA(py_edges);
 
     conn_t* connectivities = nullptr;
     PyArrayObject* py_connectivities = nullptr;
     if (compute_connectivities){
         npy_intp size_py_connectivities[] = {(npy_intp) E};
-        py_connectivities = (PyArrayObject*) PyArray_Zeros(1,
-            size_py_connectivities, PyArray_DescrFromType(NPY_CONN), 0);
+        py_connectivities = (PyArrayObject*) PyArray_ZEROS(1,
+            size_py_connectivities, NPY_CONN, 0);
         connectivities = (conn_t*) PyArray_DATA(py_connectivities);
     }
 
@@ -244,16 +244,16 @@ static PyObject* grid_to_graph(PyArrayObject* py_grid_shape,
 
     if (!graph_as_forward_star){
         if (compute_connectivities){
-            return Py_BuildValue("OO", py_edges, py_connectivities);
+            return Py_BuildValue("NN", py_edges, py_connectivities);
         }else{
-            return Py_BuildValue("O", py_edges);
+            return Py_BuildValue("N", py_edges);
         }
     }
 
     /* convert to forward star representation */
     npy_intp size_py_first_edge[] = {(npy_intp) V + 1};
-    PyArrayObject* py_first_edge = (PyArrayObject*) PyArray_Zeros(1,
-        size_py_first_edge, PyArray_DescrFromType(NPY_INDEX), 0);
+    PyArrayObject* py_first_edge = (PyArrayObject*) PyArray_ZEROS(1,
+        size_py_first_edge, NPY_INDEX, 0);
     index_t* first_edge = (index_t*) PyArray_DATA(py_first_edge);
 
     index_t* reindex = (index_t*) malloc(sizeof(index_t)*E);
@@ -285,10 +285,10 @@ static PyObject* grid_to_graph(PyArrayObject* py_grid_shape,
     PyArray_Resize(py_adj_vertices, &dims_py_adj_vertices, 0, NPY_ANYORDER);
 
     if (compute_connectivities){
-        return Py_BuildValue("OOO", py_first_edge, py_adj_vertices,
+        return Py_BuildValue("NNN", py_first_edge, py_adj_vertices,
             py_connectivities);
     }else{
-        return Py_BuildValue("OO", py_first_edge, py_adj_vertices);
+        return Py_BuildValue("NN", py_first_edge, py_adj_vertices);
     }
 }
 
