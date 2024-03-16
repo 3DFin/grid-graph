@@ -1,7 +1,7 @@
-function [first_edge, adj_vertices, connectivities] = grid_to_graph_mex( ...
+function [first_edge, adj_vertices, connectivities] = grid_to_graph( ...
             shape, connectivity, graph_as_forward_star)
 %
-%        [first_edge, adj_vertices, [connectivities]] = grid_to_graph_mex
+%        [first_edge, adj_vertices, [connectivities]] = grid_to_graph
 %           (shape, [connectivity = 1], [graph_as_forward_star = true])
 % or
 %
