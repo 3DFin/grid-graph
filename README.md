@@ -1,3 +1,17 @@
+# Grid-graph (fork)
+
+## About this fork
+
+The original code in available in this repository: https://gitlab.com/1a7r0ch3/grid-graph.
+
+This a fork for python packaging purposes.
+
+Please post issues in this repos only if you are sure your problem is related to the packaging... and please post issue on the upstream repository __only__ if you are sure your problem is not related to the packaging.
+
+Below, the original README.
+
+# Original README
+
 ## Some tools for manipulating nearest-neighbors graphs defined on regular grids
 
 C++ routines.  

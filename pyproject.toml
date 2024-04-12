@@ -22,8 +22,6 @@ classifiers = [
   "Topic :: Scientific/Engineering"
 ]
 
-dependencies = []
-
 [project.urls]
 homepage = "https://gitlab.com/1a7r0ch3/grid-graph"
 repository = "https://gitlab.com/1a7r0ch3/grid-graph.git"
