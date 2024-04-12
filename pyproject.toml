@@ -10,7 +10,10 @@ description = "Some tools for manipulating nearest-neighbors graphs defined on r
 requires-python = ">=3.8"
 license = {file = "LICENSE"}
 authors = [
-  {name = "Hugo Raget", email = "hugo.raguet@insa-cvl.fr"}
+  {name = "Hugo Raguet", email = "hugo.raguet@insa-cvl.fr"}
+]
+maintainers = [
+  {name = "Hugo Raguet", email = "hugo.raguet@insa-cvl.fr"}
 ]
 keywords = ["graph", "grid", "nearest-neighbors", "cut pursuit", "graph signal processing"]
 classifiers = [
@@ -19,9 +22,11 @@ classifiers = [
   "Topic :: Scientific/Engineering"
 ]
 
+dependencies = []
+
 [project.urls]
 homepage = "https://gitlab.com/1a7r0ch3/grid-graph"
 repository = "https://gitlab.com/1a7r0ch3/grid-graph.git"
 
 [tool.cibuildwheel]
-build = "cp3{8,9,10,11}-*" # No pypy and python 3.12 yet (because it should requires numpy 1.26)
+build = "cp3{9,10,11, 12}-*"
