@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pygrid-graph"
-version = "0.0.2"
+version = "0.0.3"
 readme = "README.md"
 description = "Some tools for manipulating nearest-neighbors graphs defined on regular grids"
 requires-python = ">=3.8"
@@ -27,4 +27,5 @@ homepage = "https://gitlab.com/1a7r0ch3/grid-graph"
 repository = "https://gitlab.com/1a7r0ch3/grid-graph.git"
 
 [tool.cibuildwheel]
-build = "cp3{9,10,11, 12}-*"
+build = "cp3{9,10,11,12}-*"
+archs = ["auto64"] # limit to 64bits builds
