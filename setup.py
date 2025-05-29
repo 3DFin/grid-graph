@@ -1,7 +1,7 @@
    #----------------------------------------------------------------------#
    #  distutils setup script for compiling cut-pursuit python extensions  #
    #----------------------------------------------------------------------#
-""" 
+"""
 Compilation command: python setup.py build_ext
 
 Hugo Raguet 2020
@@ -26,9 +26,9 @@ elif platform.system() == "Linux":
                           "-DMIN_OPS_PER_THREAD=10000"]
     extra_link_args = ["-lgomp"]
 elif platform.system() == "Darwin":
-    extra_compile_args = ["-std=c++11", "-fopenmp",
+    extra_compile_args = ["-std=c++11", "-Xpreprocessor -fopenmp",
                           "-DMIN_OPS_PER_THREAD=10000"]
-    extra_link_args = ["-lomp"] 
+    extra_link_args = ["-lomp"]
 # It is more a matter of GCC vs. Clang more than a macOS vs Linux issue
 # use something like meson/cmake to handle this in a proper way
 else:

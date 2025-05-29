@@ -4,22 +4,24 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pygrid-graph"
-version = "0.0.3"
+version = "0.0.4"
 readme = "README.md"
 description = "Some tools for manipulating nearest-neighbors graphs defined on regular grids"
 requires-python = ">=3.8"
-license = {file = "LICENSE"}
-authors = [
-  {name = "Hugo Raguet", email = "hugo.raguet@insa-cvl.fr"}
+license = { file = "LICENSE" }
+authors = [{ name = "Hugo Raguet", email = "hugo.raguet@insa-cvl.fr" }]
+maintainers = [{ name = "Hugo Raguet", email = "hugo.raguet@insa-cvl.fr" }]
+keywords = [
+    "graph",
+    "grid",
+    "nearest-neighbors",
+    "cut pursuit",
+    "graph signal processing",
 ]
-maintainers = [
-  {name = "Hugo Raguet", email = "hugo.raguet@insa-cvl.fr"}
-]
-keywords = ["graph", "grid", "nearest-neighbors", "cut pursuit", "graph signal processing"]
 classifiers = [
-  "Development Status :: 3 - Alpha",
-  "Programming Language :: Python",
-  "Topic :: Scientific/Engineering"
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python",
+    "Topic :: Scientific/Engineering",
 ]
 
 [project.urls]
@@ -27,5 +29,6 @@ homepage = "https://gitlab.com/1a7r0ch3/grid-graph"
 repository = "https://gitlab.com/1a7r0ch3/grid-graph.git"
 
 [tool.cibuildwheel]
-build = "cp3{9,10,11,12}-*"
-archs = ["auto64"] # limit to 64bits builds
+build = "cp3{10,11,12,13}-*"
+musllinux-x86_64-image = "musllinux_1_1"
+archs = ["auto64"]                       # limit to 64bits builds
